@@ -16,8 +16,8 @@ export class ParameterSetting {
    @Prop()
    param: string;
 
-   @Prop()
-   type: string;
+   // @Prop()
+   // type: string;
 
    @Prop()
    timeStamp: string;

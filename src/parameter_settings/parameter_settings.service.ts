@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateParameterSettingDto } from './dto/create-parameter_setting.dto';
-import { UpdateParameterSettingDto } from './dto/update-parameter_setting.dto';
+// import { UpdateParameterSettingDto } from './dto/update-parameter_setting.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ParameterSetting } from './schemas/parameter_settings.schema';
 
 @Injectable()
 export class ParameterSettingsService {
-  constructor(@InjectModel('ParameterSetting') private parameterSettingsModel: Model<ParameterSetting>){}
+  constructor(@InjectModel(ParameterSetting.name) private parameterSettingsModel: Model<ParameterSetting>){}
 
   async create(createParameterSettingDto: CreateParameterSettingDto) {
     const lastUser = await this.parameterSettingsModel.findOne().sort({id:-1}).exec();
@@ -16,13 +16,14 @@ export class ParameterSettingsService {
     return await newParameterSettings.save()
   }
 
-  findByParameterSetting(param: any){
-    return this.parameterSettingsModel.findOne({param})
+ async findByParameterSetting(param: any){
+    return await this.parameterSettingsModel.findOne({param})
   }
 
-  // findAll() {
-  //   return `This action returns all parameterSettings`;
-  // }
+  async findAll() {
+    return await this.parameterSettingsModel.find().exec();
+   
+  }
 
   // findOne(id: number) {
   //   return `This action returns a #${id} parameterSetting`;

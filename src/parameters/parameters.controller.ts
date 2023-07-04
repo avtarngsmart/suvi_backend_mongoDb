@@ -12,10 +12,10 @@ export class ParametersController {
   //   return this.parametersService.create(createParameterDto);
   // }
 
-  // @Get()
-  // findAll() {
-  //   return this.parametersService.findAll();
-  // }
+  @Get('/allParam')
+  findAll() {
+    return this.parametersService.findAll();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {
@@ -31,4 +31,9 @@ export class ParametersController {
   // remove(@Param('id') id: string) {
   //   return this.parametersService.remove(+id);
   // }
+
+  @Get()
+    async findfval(){
+        return await this.parametersService.findFval();
+     }
 }

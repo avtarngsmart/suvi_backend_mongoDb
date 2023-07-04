@@ -8,8 +8,8 @@ export class CreateParameterSettingDto {
   @ApiProperty()
   param: string;
 
-  @ApiProperty()
-  type: string;
+  // @ApiProperty()
+  // type: string;
 
   @ApiProperty()
   timeStamp: string;

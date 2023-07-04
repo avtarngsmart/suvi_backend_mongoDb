@@ -17,8 +17,9 @@ export class ParametersService {
     return await newParameters.save()
   }
 
-  findAll() {
-    return `This action returns all parameters`;
+  async findAll() {
+    return await this.parametersModel.find();
+    // return `This action returns all parameters`;
   }
 
   findOne(id: number) {
@@ -32,4 +33,16 @@ export class ParametersService {
   remove(id: number) {
     return `This action removes a #${id} parameter`;
   }
+
+
+  async findFval() {
+    return this.parametersModel.aggregate([
+      {
+        $group: {
+          _id:'$parameterSettingId',
+          paramValue: {$max: '$value'}
+        }
+      }
+]);
+}
 }

@@ -15,7 +15,8 @@ export class CreateDatumDto {
   readonly type: string;
 
   @ApiProperty({example:"242"})
-  readonly value: boolean | number | string;
+  // readonly value: boolean | number | string;
+  readonly value:number;
 
   @ApiProperty({example:"3-21-2018T11:14:23.11"})
   readonly timeStamp: string;

@@ -3,7 +3,8 @@ import { ParameterSettingsService } from './parameter_settings.service';
 import { CreateParameterSettingDto } from './dto/create-parameter_setting.dto';
 import { UpdateParameterSettingDto } from './dto/update-parameter_setting.dto';
 
-@Controller('parameter-settings')
+@Controller('parameters-settings')
+
 export class ParameterSettingsController {
   constructor(private readonly parameterSettingsService: ParameterSettingsService) {}
 
@@ -12,10 +13,10 @@ export class ParameterSettingsController {
   //   return this.parameterSettingsService.create(createParameterSettingDto);
   // }
 
-  // @Get()
-  // findAll() {
-  //   return this.parameterSettingsService.findAll();
-  // }
+  @Get()
+  async findAll() {
+    return await this.parameterSettingsService.findAll();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {

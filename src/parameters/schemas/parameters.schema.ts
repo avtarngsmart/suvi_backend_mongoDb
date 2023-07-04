@@ -6,7 +6,6 @@ export type ParameterDocument = HydratedDocument<Parameter>
 
 @Schema()
 export class Parameter {
-
    @Prop({required:true, unique:true, type:Number})
    id:number;
 
@@ -19,14 +18,16 @@ export class Parameter {
    @Prop()
    parameterSettingId: number;
 
-   @Prop()
-   bVal: boolean;
+   // @Prop()
+   // bVal: boolean;
 
-   @Prop()
-   fVal: number;
+   // @Prop()
+   // fVal: number;
 
+   // @Prop()
+   // sVal: string
    @Prop()
-   sVal: string
+   value:number;
 
    @Prop()
    timeStamp: string;

@@ -19,26 +19,31 @@ export class MachineService {
     const newMachine = new this.machineModel({id:nextId, ...createMachineDto});
     return await newMachine.save()
   }
-
-  findByMachine(machineToken: any){
+  findById(id:number){
+    return this.machineModel.findOne({id})
+  }
+  findByMachine(machineToken: string){
     return this.machineModel.findOne({machineToken});
   }
 
   // async updateMachine(machineId: string, updateMachineDto: UpdateMachineDto): Promise<Imachine> {
-  //   const existingMachine = this.machineModel.findByIdAndUpdate(machineId, updateMachineDto, { new: true });
+  async updateMachine(id:number, updateMachineDto: UpdateMachineDto): Promise<Imachine> {
+  const machData=this.findById(id)
+  const _id=(await machData)._id
+    const existingMachine =await this.machineModel.findByIdAndUpdate(_id, updateMachineDto, { new: true });
   //  if (!existingMachine) {
-  //    throw new NotFoundException(`machine #${machineId} not found`);
+  //    throw new NotFoundException(`machine #${_id} not found`);
   //  }
-  //  return existingMachine;
-  // }
+   return existingMachine;
+  }
 
-  // async getAllMachines(): Promise<Imachine[]> {
-  //   const machineData = await this.machineModel.find({});
-  //   if (!machineData || machineData.length == 0) {
-  //       throw new NotFoundException('machines data not found!');
-  //   }
-  //   return machineData;
-  // }
+  async getAllMachines(): Promise<Imachine[]> {
+    const machineData = await this.machineModel.find();
+    if (!machineData || machineData.length == 0) {
+        throw new NotFoundException('machines data not found!');
+    }
+    return machineData;
+  }
 
   // async getMachine(machineId: string): Promise<Imachine> {
   //   const existingMachine = await this.machineModel.findById(machineId).exec();

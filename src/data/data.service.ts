@@ -14,50 +14,53 @@ export class DataService {
     private parametersService: ParametersService,
     private parameterSettingsService: ParameterSettingsService
   ){}
-  async create(createDatumDto: CreateDatumArrayDto) {
+  async create(createDatum: CreateDatumArrayDto) {
+    const {createDatumDto}=createDatum;
     for (let i in createDatumDto){
-      const {machineToken, recipeName, param, timeStamp, type, value } = createDatumDto[i];
-  
-      let findMachine = await this.machineService.findByMachine(machineToken);
+    const {machineToken, recipeName, param, timeStamp,value } = createDatumDto[i];
+    let findMachine = await this.machineService.findByMachine(machineToken);
       let machineId;
+   
       if (!findMachine){
-        const createdMachine = await this.machineService.createMachine({machineToken})
+        const createdMachine = await this.machineService.createMachine({machineToken,customerName:"",machineName:""})
         machineId = createdMachine.id;
       }else{
         machineId = findMachine.id
-      }
-    
-      const findRecipe =  await this.recipeService.findByRecipe(recipeName);
-      let recipeId;
+}
+  const findRecipe =  await this.recipeService.findByRecipe(machineId,recipeName);
+  let recipeId;
+
       if(!findRecipe){
         const createdRecipe = await this.recipeService.create({machineId, recipeName});
         recipeId = createdRecipe.id;
       }else{
         recipeId = findRecipe.id;
       }
-      
-
       const findParamerSettings = await this.parameterSettingsService.findByParameterSetting(param);
       let parameterSettingId;
       if(!findParamerSettings){
-        const createdParameterSettings = await this.parameterSettingsService.create({machineId, param, type, timeStamp});
+        // const createdParameterSettings = await this.parameterSettingsService.create({machineId, param, type, timeStamp});
+        const createdParameterSettings = await this.parameterSettingsService.create({machineId, param,timeStamp});
         parameterSettingId = createdParameterSettings.id;
       }
       else{
         parameterSettingId = findParamerSettings.id
       }
 
-      let sVal, bVal, fVal;
-      if (type == 'string'){
-         sVal = value;
-      }
-      if (type == 'boolean'){
-         bVal = value;
-      }
-      if (type == 'number'){
-         fVal = value;
-      }
-      const createdParameters = await this.parametersService.create({machineId, recipeId, parameterSettingId, sVal, bVal, fVal, timeStamp})
+      // let sVal, bVal, fVal;
+      // if (type == 'string'){
+      //    sVal = value;
+      // }
+      // if (type == 'boolean'){
+      //    bVal = value;
+      // }
+      // if (type == 'number'){
+      //    fVal = value;
+      // }
+      // return value;
+      
+
+      const createdParameters = await this.parametersService.create({machineId, recipeId, parameterSettingId,value,timeStamp})
     }
     return "Successfully created"
   }

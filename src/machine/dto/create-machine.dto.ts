@@ -6,7 +6,7 @@ export class CreateMachineDto {
     @ApiProperty({example:"Suvi"})
     readonly machineToken: string;
 
-    @ApiProperty({example:"Koushal Khajuria"})
+    @ApiProperty({example:"Avtar Sorout"})
     readonly customerName?: string;
     
     @ApiProperty({example:"pcb101"})

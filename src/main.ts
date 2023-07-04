@@ -19,7 +19,9 @@ async function bootstrap() {
 
   app.enableCors();
 
-  const globalPrefix = 'api/v1';
+  // const globalPrefix = 'api/v1';
+  const globalPrefix = 'suvi/api/v1';
+
   app.setGlobalPrefix(globalPrefix);
 
   const document = SwaggerModule.createDocument(app, options);

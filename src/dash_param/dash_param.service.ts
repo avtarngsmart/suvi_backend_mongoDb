@@ -52,29 +52,31 @@ async GetDashParamByDashId() {
       }
     },
   ]);
-data[0].recipeName=data[0].recipeName[0].recipeName
-data[0].paramName=data[0].paramName[0].param
+  for(const i in data){
+data[i].recipeName=data[i].recipeName[0].recipeName
+data[i].paramName=data[i].paramName[0].param
+  }
     return data
     }
 async GetDashParamByDashIds(payload:any){
     const dashIds = payload.dashIds;
 const payloadData= await this.dashParamModel.find({dashId:dashIds}).exec();
+// console.log("payload Data",payloadData);
 const datas=await this.dashParamModel.aggregate([
         {
           $lookup: {
-            from: "recipes", // Name of the orders collection
+            from: "recipes", 
             localField:"recipeId",
             foreignField:"id",
             as: "recipeName",
           }
         },
-        
         {
           $lookup:{
             from:'parametersettings',
             localField:"paramId",
             foreignField:"id",
-            as: "paramName",
+            as: "param",
           }
         },
         {
@@ -82,21 +84,20 @@ const datas=await this.dashParamModel.aggregate([
         from:'parameters',
         localField:'paramId',
         foreignField:'parameterSettingId',
-        as:"value"
+        as:"fval"
       }
       }
       ]);
       for(const i in datas){
        datas[i].recipeName=datas[i].recipeName[0].recipeName
-        datas[i].paramName=datas[i].paramName[0].param
-        datas[i].value=datas[i].value[0].value
+        datas[i].param=datas[i].param[0].param
+        datas[i].fval=datas[i].fval[0].value
       }
-    const matchedData = datas.filter(obj1 =>payloadData.some(obj2 => obj2.recipeId === obj1.recipeId));
-    
+      // console.log("dtaas@@@@@@@@@@@@@2",datas);
+    // const matchedData = datas.filter(obj1 =>payloadData.some(obj2=>obj2.recipeId === obj1.recipeId));
+    const matchedData = datas.filter(obj1 =>payloadData.some(obj2=>obj2.dashId === obj1.dashId));
     return matchedData
     }
-
-
 }
 
 

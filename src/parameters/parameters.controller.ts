@@ -17,10 +17,10 @@ export class ParametersController {
     return this.parametersService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.parametersService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') recipeId: string) {
+    return this.parametersService.findOne(+recipeId);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateParameterDto: UpdateParameterDto) {

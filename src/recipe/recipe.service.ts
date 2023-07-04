@@ -28,8 +28,8 @@ export class RecipeService {
   
   }
 
-  async findOne(id: number) {
-    const findData= await this.recipeModel.findOne({id}) 
+  async findOne(machineId: number) {
+    const findData= await this.recipeModel.find({machineId}) 
     return findData
    }
 
@@ -38,7 +38,9 @@ export class RecipeService {
   }
 
   async update(id: number, updateRecipeDto: UpdateRecipeDto) {
-   const resData= this.findOne(id)
+  //  const resData= this.findOne(id)
+   const resData= await this.recipeModel.findOne({id}) 
+
   const _id=(await resData)._id
   console.log("update onjectID  ------",typeof(_id))
   //  const resData= this.recipeModel.findOne({id});

@@ -1,6 +1,10 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
-@Schema()
+@Schema(
+// {
+//     timestamps:true
+// }
+)
 export class Dash_Param{
     @Prop({require:true})
     id:number;
@@ -14,5 +18,7 @@ export class Dash_Param{
     // format:number
     @Prop()
     isActive:boolean;
+    @Prop({ default: Date.now })
+    timeStamp: Date;
 }
 export const Dash_ParamSchema =SchemaFactory.createForClass(Dash_Param)

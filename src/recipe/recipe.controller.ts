@@ -3,6 +3,7 @@ import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { machine } from 'os';
 
 @Controller('recipe')
 @ApiTags('Recipe')
@@ -28,9 +29,14 @@ export class RecipeController {
       }
   }
 
+  // @Get(':id')
+  // findOne(@Param('id') id: number) {
+  //   return this.recipeService.findOne(+id);
+  // }
+
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.recipeService.findOne(+id);
+  findOne(@Param('id') machineId: number) {
+    return this.recipeService.findOne(+machineId);
   }
 
   @Patch('/:id')

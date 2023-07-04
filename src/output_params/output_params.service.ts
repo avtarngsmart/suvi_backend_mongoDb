@@ -40,7 +40,9 @@ const data=await this.outputModel.aggregate([
     }
   },
 ])
-data[0].param=data[0].param[0].id
+for(const i in data){
+data[i].param=data[i].param[0].id
+}
 const combinedData =await data.reduce((result, obj1) => {
       const matchingObj2 = paramValues.find((obj2) => obj2._id === obj1.param);
       if (matchingObj2) {

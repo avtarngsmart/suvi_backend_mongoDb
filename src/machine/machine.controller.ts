@@ -1,9 +1,8 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res,Patch } from '@nestjs/common';
+import { Body, Controller,Get, HttpStatus, Param, Post,Res,Patch } from '@nestjs/common';
 import { CreateMachineDto } from './dto/create-machine.dto';
 import { MachineService } from './machine.service';
 import { UpdateMachineDto } from './dto/update-machine.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger/dist';
-
 @Controller('machine')
 @ApiTags("Machine")
 export class MachineController {
@@ -27,12 +26,11 @@ export class MachineController {
     }
   }
 
-  // @Put('/:id')
+
   @Patch('/:id')
   @ApiResponse({ status: 201, description: 'The record has been successfully updated.'})
   @ApiResponse({ status: 400, description: 'Bad Request' })
-  // async updateMachine(@Res() response, @Param('id') machineId: string, @Body() updateMachineDto: UpdateMachineDto) {
-  async updateMachine(@Res() response,@Param('id') _id:any, @Body() updateMachineDto: UpdateMachineDto) {
+async updateMachine(@Res() response,@Param('id') _id:any, @Body() updateMachineDto: UpdateMachineDto) {
 try {
       const existingMachine = await this.machineService.updateMachine(_id,updateMachineDto);
       return response.status(HttpStatus.OK).json({

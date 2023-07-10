@@ -12,39 +12,27 @@ export class DashParamController {
     return this.dashParamService.create(createDashParamDto);
   }
 
-  @Get()
-  findAll() {
-    return this.dashParamService.findAllDashParams();
-  }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.dashParamService.findOne(+id);
+  // @Get()
+  // findAll() {
+  //   return this.dashParamService.findAllDashParams();
   // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDashParamDto: UpdateDashParamDto) {
-    return this.dashParamService.update(+id, updateDashParamDto);
-  }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.dashParamService.remove(+id);
-  }
+
+ 
  
   @Get('/show-parameter')
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
-  GetDashParamByMultipleDash(){
-    return this.dashParamService.GetDashParamByDashId();
+   async GetDashParamByMultipleDash(){
+    return await this.dashParamService.GetDashParamByDashId();
   }
 
   @Post('/multi')
-  // @Get('/multi')
+  
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
-  //  GetDashParamByMultipleDashIds(@Body() payload: any) {
-  //  GetDashParamByMultipleDashIds(@Query('field') field: string, @Query('value') value: any) {
+ 
    GetDashParamByMultipleDashIds(@Body() payload: any ) {
     return this.dashParamService.GetDashParamByDashIds(payload);
   }

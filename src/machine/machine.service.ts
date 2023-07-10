@@ -4,30 +4,29 @@ import { Model } from "mongoose";
 import { CreateMachineDto } from "./dto/create-machine.dto";
 import { UpdateMachineDto } from "./dto/update-machine.dto";
 import { Imachine } from "./interface/machine.interface";
-
-
-
 @Injectable()
 export class MachineService {
   constructor(
     @InjectModel('Machine') private machineModel:Model<Imachine>) { }
-
- 
-  async createMachine(createMachineDto: CreateMachineDto) {
+async createMachine(createMachineDto: CreateMachineDto) {
+  const {machineToken,customerName,machineName}=createMachineDto
     const lastUser = await this.machineModel.findOne().sort({ id: -1 }).exec();
     const nextId = lastUser ? lastUser.id + 1 : 1;
-    const newMachine = new this.machineModel({id:nextId, ...createMachineDto});
+    function randomString(len) {
+      var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      return [...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], '');
+  }
+  const tokenId = randomString(7)
+    const newMachine = new this.machineModel({id:nextId,machineToken:tokenId,customerName:customerName,machineName:machineName});
     return await newMachine.save()
   }
   findById(id:number){
     return this.machineModel.findOne({id})
   }
-  findByMachine(machineToken: string){
-    return this.machineModel.findOne({machineToken});
-  }
-
-  // async updateMachine(machineId: string, updateMachineDto: UpdateMachineDto): Promise<Imachine> {
-  async updateMachine(id:number, updateMachineDto: UpdateMachineDto): Promise<Imachine> {
+  async findByMachine(machineToken: string){
+    return await this.machineModel.findOne({machineToken});
+}
+async updateMachine(id:number, updateMachineDto: UpdateMachineDto): Promise<Imachine> {
   const machData=this.findById(id)
   const _id=(await machData)._id
     const existingMachine =await this.machineModel.findByIdAndUpdate(_id, updateMachineDto, { new: true });
@@ -44,12 +43,4 @@ export class MachineService {
     }
     return machineData;
   }
-
-  // async getMachine(machineId: string): Promise<Imachine> {
-  //   const existingMachine = await this.machineModel.findById(machineId).exec();
-  //   if (!existingMachine) {
-  //    throw new NotFoundException(`machine #${machineId} not found`);
-  //   }
-  //   return existingMachine;
-  // }
 }

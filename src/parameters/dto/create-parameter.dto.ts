@@ -12,16 +12,8 @@ export class CreateParameterDto {
   @ApiProperty()
   parameterSettingId: number;
 
-  // @ApiProperty()
-  // bVal: boolean;
-
-  // @ApiProperty()
-  // fVal: number;
   @ApiProperty()
   value:number;
-
-  // @ApiProperty()
-  // sVal: string;
 
   @ApiProperty()
   timeStamp: string;

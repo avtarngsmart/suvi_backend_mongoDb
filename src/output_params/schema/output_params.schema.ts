@@ -19,7 +19,7 @@ size_x:number;
 @Prop()
 size_y:number;
 // @Column({ type: "timestamp", default: () => "NOW()" })
-@Prop()
+@Prop({default:new Date()})
 timeStamp:Date
 }
 export const Output_paramsSchema=SchemaFactory.createForClass(Output_params)

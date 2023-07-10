@@ -4,20 +4,15 @@ import { UpdateOutputParamDto } from './dto/update-output_param.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Output_params } from './schema/output_params.schema';
-// import { ObjectID } from 'mongodb';
-// import { Parameter } from '../parameters/schemas/parameters.schema';
 import {ParametersService} from '../parameters/parameters.service';
 @Injectable()
 export class OutputParamsService {
   constructor(
      @InjectModel(Output_params.name) private outputModel:Model<Output_params>,
-     private parameterServices:ParametersService
-    //  @InjectModel(Parameter.name) private parameterModel:Model<Parameter>
-   ){}
+     private parameterServices:ParametersService   ){}
   async create(createOutputParamDto: CreateOutputParamDto) {
     const lastUser = await this.outputModel.findOne().sort({ id: -1 }).exec();
     const nextId = lastUser ? lastUser.id + 1 : 1;
-    
     const outputData=await  this.outputModel.create({id:nextId,...createOutputParamDto})
     if(Object.keys(outputData).length==0){
       throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
@@ -25,8 +20,7 @@ export class OutputParamsService {
     else{
       return outputData.save()
     }
-    // return outputData.save()
-  }
+   }
 
 async findAll() {
     const paramValues=await this.parameterServices.findFval();
@@ -40,8 +34,14 @@ const data=await this.outputModel.aggregate([
     }
   },
 ])
+// console.log("paramValues------------------@@@@",paramValues);
+// console.log("data--------------dddddddd",data);
+
 for(const i in data){
 data[i].param=data[i].param[0].id
+// console.log("for data",data[i].param[0].id);
+
+
 }
 const combinedData =await data.reduce((result, obj1) => {
       const matchingObj2 = paramValues.find((obj2) => obj2._id === obj1.param);
@@ -50,11 +50,11 @@ const combinedData =await data.reduce((result, obj1) => {
       }
       return result;
     }, []);
-return combinedData
+return combinedData;
 }
 
 async  findOne(id: number) {
-  return await this.outputModel.findOne({id})  
+  return await this.outputModel.findOne({id})    
 }
 async  update(id: number, updateOutputParamDto: UpdateOutputParamDto) {
     const outputId=this.findOne(id)

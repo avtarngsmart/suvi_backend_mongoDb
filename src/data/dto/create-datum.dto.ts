@@ -24,6 +24,6 @@ export class CreateDatumDto {
 }
 
 export class CreateDatumArrayDto{
-  @ApiProperty({ type: [CreateDatumDto] }) // Use 'type' option to specify array type
-  createDatumDto: CreateDatumDto[];
+  @ApiProperty({ type: [CreateDatumDto] }) 
+  GenerateMachinesData: CreateDatumDto[];
 }

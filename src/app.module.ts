@@ -25,5 +25,7 @@ import { ConfigModule } from '@nestjs/config';
     ParameterSettingsModule, ParametersModule, DataModule, DashboardModule, OutputParamsModule, DashParamModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
+
+  
 })
 export class AppModule {}

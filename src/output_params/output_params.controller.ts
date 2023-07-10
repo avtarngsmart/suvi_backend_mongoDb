@@ -11,8 +11,7 @@ export class OutputParamsController {
 
   @Post()
   async create(@Res() response,@Body() createOutputParamDto: CreateOutputParamDto) {
-    // return this.outputParamsService.create(createOutputParamDto);
-    try {
+  try {
       const OutputParameter =await this.outputParamsService.create(createOutputParamDto);
       return response.status(HttpStatus.CREATED).json({
         message: 'Output-Parameter has been created successfully',

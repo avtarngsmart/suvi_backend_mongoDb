@@ -8,10 +8,11 @@ import {Auth,authSchema} from './schema/auth.schema';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
-
+import {Recipe, RecipeSchema} from '../recipe/schemas/recipe.schema';
+import { RecipeService } from 'src/recipe/recipe.service';
 @Module({
   imports:[  
-    MongooseModule.forFeature([{name:Auth.name,schema:authSchema}]),
+    MongooseModule.forFeature([{name:Auth.name,schema:authSchema},{name:Recipe.name,schema:RecipeSchema}]),
  PassportModule.register({ defaultStrategy: 'jwt' }),
    JwtModule.registerAsync({
      inject: [ConfigService],
@@ -25,13 +26,9 @@ import { JwtStrategy } from './jwt.strategy';
        };
      },
    }),
- 
- 
-   
-     
-   ],
+ ],
   controllers: [AuthController],
-  providers: [AuthService,JwtStrategy],
+  providers: [AuthService,JwtStrategy,RecipeService],
   exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

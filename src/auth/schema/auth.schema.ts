@@ -10,5 +10,6 @@ name:string;
 email:string;
 @Prop()
 password:string;
+
 }
 export const authSchema=SchemaFactory.createForClass(Auth)

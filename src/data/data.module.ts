@@ -8,7 +8,7 @@ import { MachineModule } from 'src/machine/machine.module';
 
 @Module({
   imports:[ RecipeModule, ParametersModule, ParameterSettingsModule, MachineModule],
-  controllers: [DataController],
+  controllers: [DataController],   
   providers: [DataService]
 })
 export class DataModule {}

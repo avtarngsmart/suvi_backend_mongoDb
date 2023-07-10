@@ -4,14 +4,12 @@ import { UpdateDashboardDto } from './dto/update-dashboard.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Dashboard } from './schemas/dashboard.schema';
-// import {Idashboard} from './interface/dashboard.interface';
+
 @Injectable()
 export class DashboardService{
   constructor(@InjectModel(Dashboard.name) private dashboardModel: Model<Dashboard>) {}
-  // constructor( @InjectModel('Dashbaord') private readonly dashboardModel:Model<Dashboard> ){}
   async create(createDashboardDto: CreateDashboardDto): Promise<Dashboard>{
-    
-    const lastUser = await this.dashboardModel.findOne().sort({ id: -1 }).exec();
+  const lastUser = await this.dashboardModel.findOne().sort({ id: -1 }).exec();
     const nextId = lastUser ? lastUser.id + 1 : 1;
   const data=new this.dashboardModel({id:nextId,...createDashboardDto})
   return await data.save();
@@ -19,14 +17,11 @@ export class DashboardService{
 
  async findAll():Promise<Dashboard[]> {
   return await this.dashboardModel.find().exec();
-    // return `This action returns all dashboard`;
-  }
+ }
 
   async findOne(id: number) {
     return await  this.dashboardModel.findOne({id});
-    // return this.machineModel.findOne({id})
-    // return `This action returns a #${id} dashboard`;
-  }
+   }
 
  async update(id: number, updateDashboardDto: UpdateDashboardDto) {
     const recpData=await this.findOne(id)

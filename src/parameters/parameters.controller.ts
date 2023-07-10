@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Delete } from '@nestjs/common';
 import { ParametersService } from './parameters.service';
-import { CreateParameterDto } from './dto/create-parameter.dto';
-import { UpdateParameterDto } from './dto/update-parameter.dto';
+// import { CreateParameterDto } from './dto/create-parameter.dto';
+// import { UpdateParameterDto } from './dto/update-parameter.dto';
+// import { ApiResponse } from '@nestjs/swagger';
 
 @Controller('parameters')
 export class ParametersController {
@@ -27,13 +28,11 @@ export class ParametersController {
   //   return this.parametersService.update(+id, updateParameterDto);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.parametersService.remove(+id);
-  // }
+
 
   @Get()
     async findfval(){
         return await this.parametersService.findFval();
      }
+
 }

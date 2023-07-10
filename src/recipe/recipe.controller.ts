@@ -29,10 +29,7 @@ export class RecipeController {
       }
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: number) {
-  //   return this.recipeService.findOne(+id);
-  // }
+
 
   @Get(':id')
   findOne(@Param('id') machineId: number) {
@@ -42,31 +39,8 @@ export class RecipeController {
   @Patch('/:id')
   @ApiResponse({ status: 201, description: 'The record has been successfully updated.'})
   @ApiResponse({ status: 400, description: 'Bad Request' })
-  // async updateMachine(@Res() response, @Param('id') machineId: string, @Body() updateMachineDto: UpdateMachineDto) {
   async updateMachine(@Param('id') _id:any, @Body() updateRecipeDto: UpdateRecipeDto) {
   const RecipeControllers= await this.recipeService.update(_id,updateRecipeDto);
   return RecipeControllers
-
-// try {
-//      return await this.recipeService.update(id,updateRecipeDto);
-//       return response.status(HttpStatus.OK).json({
-//         message: 'Machine has been successfully updated',
-//         });
-//     }
-//     catch (err){
-//       return response.status(err.status).json(err.response);
-//     }
   }
-  // update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
-    
-    
-  //   return this.recipeService.update(+id, updateRecipeDto);
-
-
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.recipeService.remove(+id);
-  // }
 }

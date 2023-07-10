@@ -24,9 +24,7 @@ export class Dashboard{
     
     @Prop()
     size_y:number
-    
-    // @Prop({type:"datetimeoffset"})
-    @Prop()
+    @Prop({default:new Date})
      timestamp: Date;
 }
 export const dashboardSchema=SchemaFactory.createForClass(Dashboard);

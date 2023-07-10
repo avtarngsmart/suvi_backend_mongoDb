@@ -28,8 +28,4 @@ export class ParameterSettingsController {
   //   return this.parameterSettingsService.update(+id, updateParameterSettingDto);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.parameterSettingsService.remove(+id);
-  // }
 }

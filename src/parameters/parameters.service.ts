@@ -4,19 +4,17 @@ import { UpdateParameterDto } from './dto/update-parameter.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Parameter } from './schemas/parameters.schema';
 import { Model } from 'mongoose';
-// import {ParameterSetting} from '../parameter_settings/schemas/parameter_settings.schema';
 @Injectable()
 export class ParametersService {
-
-  constructor(@InjectModel(Parameter.name) private parametersModel: Model<Parameter>,
-    // @InjectModel(ParameterSetting.name) private parameterSettingModel:Model<ParameterSetting>
-  ) { }
+constructor(
+  @InjectModel(Parameter.name) private parametersModel: Model<Parameter>,
+ ) {}
 
   async create(createParameterDto: CreateParameterDto) {
     const lastUser = await this.parametersModel.findOne().sort({ id: -1 }).exec();
     const nextId = lastUser ? lastUser.id + 1 : 1;
     const newParameters = new this.parametersModel({ id: nextId, ...createParameterDto })
-    return await newParameters.save()
+    return await newParameters.save();
   }
 
   async findAll() {
@@ -52,9 +50,7 @@ export class ParametersService {
     return `This action updates a #${id} parameter`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} parameter`;
-  }
+
 
 
   async findFval() {
@@ -62,9 +58,14 @@ export class ParametersService {
       {
         $group: {
           _id: '$parameterSettingId',
-          paramValue: { $max: '$value' }
-        }
+          paramValue: { $last: '$value' }
+       }
       }
     ]);
   }
+
+
+
+
+ 
 }

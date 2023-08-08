@@ -22,8 +22,8 @@ export class CreateDatumDto {
   readonly timeStamp: string;
 
 }
-
 export class CreateDatumArrayDto{
   @ApiProperty({ type: [CreateDatumDto] }) 
+  // GenerateMachinesData: CreateDatumDto[];
   GenerateMachinesData: CreateDatumDto[];
 }

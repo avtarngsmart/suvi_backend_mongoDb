@@ -1,10 +1,12 @@
 import { Controller, Get, Param, Delete } from '@nestjs/common';
 import { ParametersService } from './parameters.service';
+import { ApiTags } from '@nestjs/swagger';
 // import { CreateParameterDto } from './dto/create-parameter.dto';
 // import { UpdateParameterDto } from './dto/update-parameter.dto';
 // import { ApiResponse } from '@nestjs/swagger';
 
 @Controller('parameters')
+@ApiTags('Parameters')
 export class ParametersController {
   constructor(private readonly parametersService: ParametersService) {}
 

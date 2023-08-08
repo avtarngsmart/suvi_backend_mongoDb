@@ -51,7 +51,7 @@ try {
       return response.status(HttpStatus.OK).json({
         message: 'All machines data found successfully',machineData});
     } catch (err) {
-      return response.status(err.status).json(err.response);
+      return response.status(err.status).json(err.response)
     }
   }
   

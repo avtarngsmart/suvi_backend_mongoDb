@@ -24,9 +24,22 @@ export class ParameterSettingsService {
    
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} parameterSetting`;
-  // }
+  findOne(id: number) {
+    const data= this.parameterSettingsModel.aggregate([
+      {
+        $lookup:{
+          from: 'parameters',
+          localField: "id",
+          foreignField: "parameterSettingId",
+          as: "paramName"
+        }
+      }
+    ]
+
+    )
+    return data
+    // return `This action returns a #${id} parameterSetting`;
+  }
 
   // update(id: number, updateParameterSettingDto: UpdateParameterSettingDto) {
   //   return `This action updates a #${id} parameterSetting`;

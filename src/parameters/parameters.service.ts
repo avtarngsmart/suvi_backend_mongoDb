@@ -31,29 +31,31 @@ constructor(
           foreignField: "id",
           as: "paramName",
         }
-      }
+      },
+      
+     
+      
     ]);
     for (const i in data) {
-      data[i].paramName = data[i].paramName[0].param
-    }
+      data[i].paramName = data[i].paramName[0].param }
+      
     let foundObject = [];
     for (const item of data) {
-      if (item.recipeId == `${recipeId}`) {
-        foundObject.push(item)
-      }
-    }
-    return foundObject
+      if (item.recipeId == `${recipeId} `) {
+       
+       
+        foundObject.push(item);
+        }}
+        const arrayUniqueByKey = [...new Map(foundObject.map(item =>
+          [item['paramName'], item])).values()];
+    return arrayUniqueByKey;
 
   }
 
   update(id: number, updateParameterDto: UpdateParameterDto) {
     return `This action updates a #${id} parameter`;
   }
-
-
-
-
-  async findFval() {
+async findFval() {
     return this.parametersModel.aggregate([
       {
         $group: {

@@ -14,9 +14,9 @@ export class AuthService {
     @InjectModel(Auth.name)
     private userModel: Model<Auth>,
     private jwtService: JwtService,
-    private recipeService:RecipeService
+    // private recipeService:RecipeService
     
-  ) {}
+  ){}
 
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
@@ -46,9 +46,7 @@ export class AuthService {
 
   async login(loginDto: LoginDto): Promise<{ token: string }> {
     const { email, password } = loginDto;
-
     const user = await this.userModel.findOne({ email });
-
     if (!user) {
       throw new UnauthorizedException('Invalid email or password');
     }
@@ -59,7 +57,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    const token = this.jwtService.sign({ id: user._id,name:user.email});
+    const token = this.jwtService.sign({ id: user._id,name:user.name});
 
     return { token };
   }

@@ -1,10 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get} from '@nestjs/common';
 import { ParameterSettingsService } from './parameter_settings.service';
-import { CreateParameterSettingDto } from './dto/create-parameter_setting.dto';
-import { UpdateParameterSettingDto } from './dto/update-parameter_setting.dto';
-
+import { ApiTags } from '@nestjs/swagger';
 @Controller('parameters-settings')
-
+@ApiTags('Parameter-setting')
 export class ParameterSettingsController {
   constructor(private readonly parameterSettingsService: ParameterSettingsService) {}
 

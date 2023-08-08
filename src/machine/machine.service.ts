@@ -12,12 +12,12 @@ async createMachine(createMachineDto: CreateMachineDto) {
   const {machineToken,customerName,machineName}=createMachineDto
     const lastUser = await this.machineModel.findOne().sort({ id: -1 }).exec();
     const nextId = lastUser ? lastUser.id + 1 : 1;
-    function randomString(len) {
-      var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      return [...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], '');
-  }
-  const tokenId = randomString(7)
-    const newMachine = new this.machineModel({id:nextId,machineToken:tokenId,customerName:customerName,machineName:machineName});
+  //   function randomString(len) {
+  //     var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  //     return [...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], '');
+  // }
+  // const tokenId = randomString(7)
+    const newMachine = new this.machineModel({id:nextId,machineToken:machineToken,customerName:customerName,machineName:machineName});
     return await newMachine.save()
   }
   findById(id:number){

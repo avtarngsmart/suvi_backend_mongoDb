@@ -231,7 +231,6 @@ async GetDashParamByDashIds(payload:any){
     ])
 
     const payloadData= await this.dashParamModel.find({dashId:dashIds}).exec();
-//     // console.log("datas--------@@@@@@",datas);
 //     // console.log("payloadDAta------------",payloadData);
 
 // for(let dashIds of payloadData){
@@ -286,8 +285,8 @@ const {recipeId,paramId,dashId}=payloadData[i]
   //   // j=j+1
   // }
   return tempData
-    const matchedData = datas.filter(obj1 =>payloadData.some(obj2=>obj2.recipeId===obj1.recipeId&&obj2.paramId === obj1.parameterSettingId));
-    return matchedData
+    // const matchedData = datas.filter(obj1 =>payloadData.some(obj2=>obj2.recipeId===obj1.recipeId&&obj2.paramId === obj1.parameterSettingId));
+    // return matchedData
 }
 
 }

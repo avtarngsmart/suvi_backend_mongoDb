@@ -21,7 +21,10 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
     }),
     MachineModule, 
-    MongooseModule.forRoot('mongodb://0.0.0.0:27017',{dbName:'suvi'}), RecipeModule, 
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017',{dbName:'suvi'})
+    // MongooseModule.forRoot('mongodb://0.0.0.0:27017',{dbName:'suvi'})
+   
+, RecipeModule, 
     ParameterSettingsModule, ParametersModule, DataModule, DashboardModule, OutputParamsModule, DashParamModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],

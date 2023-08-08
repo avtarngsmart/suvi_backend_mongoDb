@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { DashParamService } from './dash_param.service';
 import { CreateDashParamDto } from './dto/create-dash_param.dto';
-import { UpdateDashParamDto } from './dto/update-dash_param.dto';
-import { ApiResponse } from '@nestjs/swagger';
+// import { UpdateDashParamDto } from './dto/update-dash_param.dto';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('dash-param')
+@ApiTags('Dash-Param')
 export class DashParamController {
   constructor(private readonly dashParamService: DashParamService) {}
   @Post()
@@ -16,12 +17,7 @@ export class DashParamController {
   // findAll() {
   //   return this.dashParamService.findAllDashParams();
   // }
-
-
-
- 
- 
-  @Get('/show-parameter')
+@Get('/show-parameter')
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
    async GetDashParamByMultipleDash(){
